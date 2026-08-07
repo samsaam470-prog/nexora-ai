@@ -1,101 +1,103 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 
 export default function DashboardPage() {
-
-  const [idea, setIdea] = useState("");
-  const [plan, setPlan] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-
-
-  async function generatePlan() {
-
-    if (!idea) return;
-
-    setLoading(true);
-
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        idea,
-      }),
-    });
-
-
-    const data = await response.json();
-
-    setPlan(data.plan);
-
-    setLoading(false);
-  }
-
-
   return (
-    <main className="min-h-screen p-8">
+    <main className="min-h-screen bg-black px-6 py-10 text-white">
+      <div className="mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="mb-10">
+          <p className="mb-2 text-sm text-blue-400">Nexora AI</p>
 
-      <h1 className="text-4xl font-bold">
-        Nexora AI Dashboard
-      </h1>
+          <h1 className="text-4xl font-bold tracking-tight">
+            Dashboard
+          </h1>
 
-
-      <div className="mt-8">
-
-        <textarea
-          className="w-full border rounded-lg p-4"
-          placeholder="Describe your business idea..."
-          value={idea}
-          onChange={(e)=>setIdea(e.target.value)}
-        />
-
-
-        <button
-          onClick={generatePlan}
-          className="mt-4 px-6 py-3 rounded-lg bg-black text-white"
-        >
-          {loading ? "Generating..." : "Generate Business Plan"}
-        </button>
-
-      </div>
-
-
-      {plan && (
-
-        <div className="mt-10 space-y-5">
-
-          <h2 className="text-2xl font-bold">
-            {plan.industry}
-          </h2>
-
-
-          {plan.sections.map(
-            (section:any)=>(
-              
-              <div 
-                key={section.title}
-                className="border rounded-lg p-4"
-              >
-
-                <h3 className="font-bold">
-                  {section.title}
-                </h3>
-
-                <p className="mt-2">
-                  {section.content}
-                </p>
-
-              </div>
-
-            )
-          )}
-
+          <p className="mt-3 max-w-2xl text-white/60">
+            Your Nexora workspace. Choose a tool below to get started.
+          </p>
         </div>
 
-      )}
+        {/* Tools */}
+        <section>
+          <h2 className="mb-4 text-xl font-semibold">
+            Your Tools
+          </h2>
 
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Business Planner */}
+            <Link
+              href="/dashboard/business-plan"
+              className="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-blue-500/40 hover:bg-white/10"
+            >
+              <div className="mb-4 text-3xl">🚀</div>
+
+              <h3 className="text-xl font-semibold">
+                Business Planner
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-white/60">
+                Build a practical business plan using Nexora's
+                industry knowledge.
+              </p>
+
+              <div className="mt-5 text-sm font-medium text-blue-400 group-hover:text-blue-300">
+                Open Business Planner →
+              </div>
+            </Link>
+
+            {/* Coming Soon */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 opacity-70">
+              <div className="mb-4 text-3xl">📄</div>
+
+              <h3 className="text-xl font-semibold">
+                Resume Builder
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-white/60">
+                Create professional resumes using templates and
+                structured knowledge.
+              </p>
+
+              <div className="mt-5 text-sm text-white/40">
+                Coming soon
+              </div>
+            </div>
+
+            {/* Coming Soon */}
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 opacity-70">
+              <div className="mb-4 text-3xl">✉️</div>
+
+              <h3 className="text-xl font-semibold">
+                Email Writer
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-white/60">
+                Create professional emails using Nexora templates
+                and knowledge.
+              </p>
+
+              <div className="mt-5 text-sm text-white/40">
+                Coming soon
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Status */}
+        <section className="mt-10 rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h2 className="text-lg font-semibold">
+            Nexora Development
+          </h2>
+
+          <p className="mt-2 text-sm leading-6 text-white/60">
+            Nexora is currently in its learning and development
+            stage. More tools, templates, and industry knowledge
+            will be added over time.
+          </p>
+        </section>
+      </div>
     </main>
   );
 }
