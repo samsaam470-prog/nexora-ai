@@ -29,10 +29,7 @@ const features = [
 
 export default function Features() {
   return (
-    <section
-      id="features"
-      className="px-6 py-24"
-    >
+    <section id="features" className="px-6 py-24">
       <div className="mx-auto max-w-7xl text-center">
         <h2 className="text-4xl font-bold md:text-5xl">
           Powerful AI Tools
@@ -52,10 +49,7 @@ export default function Features() {
                 key={feature.title}
                 className="rounded-2xl border border-white/10 bg-white/5 p-6 text-left transition hover:border-blue-500 hover:bg-white/10"
               >
-                <Icon
-                  className="mb-5 h-10 w-10 text-blue-500"
-                  aria-hidden="true"
-                />
+                <Icon className="mb-5 h-10 w-10 text-blue-500" />
 
                 <h3 className="mb-3 text-xl font-semibold">
                   {feature.title}
@@ -67,6 +61,14 @@ export default function Features() {
               </div>
             );
           })}
+        </div>
+
+        {/* Early-stage message */}
+        <div className="mx-auto mt-12 max-w-2xl rounded-xl border border-blue-500/20 bg-blue-500/5 px-6 py-4">
+          <p className="text-sm text-gray-400">
+            🚀 Nexora is in its early stage and getting new features day by
+            day.
+          </p>
         </div>
       </div>
     </section>
